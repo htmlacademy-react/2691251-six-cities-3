@@ -34,7 +34,7 @@ function App({ offersCount }: AppProps): JSX.Element {
           }
         />
         <Route
-          path={AppRoute.Offer}
+          path={AppRoute.OfferWithId}
           element={<OfferPage />}
         />
         <Route
