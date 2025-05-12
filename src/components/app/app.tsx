@@ -6,18 +6,20 @@ import OfferPage from '../../pages/offer-page/offer-page';
 import FavoritesPage from '../../pages/favorites-page/favorites-page';
 import PrivateRoute from '../private-route/private-route';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
+import { Offers } from '../../types/offer';
 
 type AppProps = {
   offersCount: number;
+  offers: Offers;
 }
 
-function App({ offersCount }: AppProps): JSX.Element {
+function App({ offersCount, offers }: AppProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={AppRoute.Main}
-          element={<MainPage offersCount={offersCount} />}
+          element={<MainPage offersCount={offersCount} offers={offers} />}
         />
         <Route
           path={AppRoute.Login}
