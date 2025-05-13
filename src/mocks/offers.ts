@@ -20,7 +20,7 @@ export const offers: Offer[] = [
       'longitude': 2.342499,
       'zoom': 16
     },
-    'isFavorite': false,
+    'isFavorite': true,
     'isPremium': false,
     'rating': 4.1
   },
@@ -71,25 +71,25 @@ export const offers: Offer[] = [
     'rating': 4
   },
   {
-    'id': 'ccd87b72-e6b5-4d04-9e9e-11420a141dc1',
-    'title': 'Canal View Prinsengracht',
-    'type': 'apartment',
-    'price': 122,
-    'previewImage': 'https://15.design.htmlacademy.pro/static/hotel/6.jpg',
+    'id': '2d24a23e-50f3-4c92-a2bf-b5d4db91e541',
+    'title': 'The house among olive ',
+    'type': 'hotel',
+    'price': 171,
+    'previewImage': 'https://15.design.htmlacademy.pro/static/hotel/3.jpg',
     'city': {
-      'name': 'Paris',
+      'name': 'Cologne',
       'location': {
-        'latitude': 48.85661,
-        'longitude': 2.351499,
+        'latitude': 50.938361,
+        'longitude': 6.959974,
         'zoom': 13
       }
     },
     'location': {
-      'latitude': 48.85761,
-      'longitude': 2.358499,
+      'latitude': 50.916361,
+      'longitude': 6.944974,
       'zoom': 16
     },
     'isFavorite': true,
     'isPremium': true,
-    'rating': 2.1
+    'rating': 5
   }];
