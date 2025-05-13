@@ -40,7 +40,7 @@ function FavoritesPage({ offers }: FavoritesPageProps): JSX.Element {
                   </a>
                 </li>
                 <li className="header__nav-item">
-                  <Link className="header__nav-link" to={AppRoute.Favorites}>
+                  <Link className="header__nav-link" to={AppRoute.Login}>
                     <span className="header__signout">Sign out</span>
                   </Link>
                 </li>
