@@ -3,6 +3,8 @@ import { Offers } from '../../types/offer';
 import { AppRoute } from '../../const';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { CITY } from '../../mocks/city';
+import Map from '../../components/map/map';
 
 type MainPageProps = {
   offersCount: number;
@@ -114,7 +116,13 @@ function MainPage({ offersCount, offers }: MainPageProps): JSX.Element {
               </div>
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <section className="cities__map map">
+                <Map
+                  city={CITY}
+                  offers={offers}
+                />
+
+              </section>
             </div>
           </div>
         </div>
