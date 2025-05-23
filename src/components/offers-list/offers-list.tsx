@@ -16,6 +16,7 @@ function OffersList({ offers, onHandleChangeActiveId }: OffersListProps): JSX.El
             onHandleChangeActiveId={onHandleChangeActiveId}
             offer={offer}
             key={keyValue}
+            isNearOffer={false}
           />
         );
       })}
