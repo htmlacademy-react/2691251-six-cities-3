@@ -76,12 +76,13 @@ function OfferPage({ offers, authorizationStatus }: OfferPageProps): JSX.Element
             </div>
             <div className="offer__container container">
               <div className="offer__wrapper">
+                {offer.isPremium &&
                 <div className="offer__mark">
                   <span>Premium</span>
-                </div>
+                </div>}
                 <div className="offer__name-wrapper">
                   <h1 className="offer__name">
-                    Beautiful &amp; luxurious studio at great location
+                    {offer.title}
                   </h1>
                   <button className="offer__bookmark-button button" type="button">
                     <svg className="offer__bookmark-icon" width="31" height="33">
@@ -92,10 +93,10 @@ function OfferPage({ offers, authorizationStatus }: OfferPageProps): JSX.Element
                 </div>
                 <div className="offer__rating rating">
                   <div className="offer__stars rating__stars">
-                    <span style={{ width: '80%' }}></span>
+                    <span style={{ width: `${Math.round(offer.rating) * 20}%` }}></span>
                     <span className="visually-hidden">Rating</span>
                   </div>
-                  <span className="offer__rating-value rating__value">4.8</span>
+                  <span className="offer__rating-value rating__value">{offer.rating}</span>
                 </div>
                 <ul className="offer__features">
                   <li className="offer__feature offer__feature--entire">
