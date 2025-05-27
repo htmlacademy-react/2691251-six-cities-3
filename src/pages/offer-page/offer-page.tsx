@@ -17,7 +17,7 @@ function OfferPage({ offers }: OfferPageProps): JSX.Element {
   const offer = offers.find((innerOffer) => innerOffer.id === params.id);
 
   return (
-    offer ?
+    !offer ? <Navigate to={'no-such-page'} /> :
       <div className="page">
         <header className="header">
           <div className="container">
@@ -193,7 +193,7 @@ function OfferPage({ offers }: OfferPageProps): JSX.Element {
             </section>
           </div>
         </main>
-      </div> : <Navigate to={AppRoute.Main} />);
+      </div>);
 }
 
 
