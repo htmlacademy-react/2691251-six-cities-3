@@ -5,6 +5,7 @@ type ReviewItemProps = {
 }
 
 function ReviewItem({review}:ReviewItemProps): JSX.Element {
+  const date = new Date(review.date);
   return (
     <li className="reviews__item">
       <div className="reviews__user user">
@@ -12,20 +13,20 @@ function ReviewItem({review}:ReviewItemProps): JSX.Element {
           <img className="reviews__avatar user__avatar" src={review.user.avatarUrl} width="54" height="54" alt="Reviews avatar" />
         </div>
         <span className="reviews__user-name">
-          Max
+          {review.user.name}
         </span>
       </div>
       <div className="reviews__info">
         <div className="reviews__rating rating">
           <div className="reviews__stars rating__stars">
-            <span style={{ width: '80%' }}></span>
+            <span style={{ width: `${review.rating * 20}%` }}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
         <p className="reviews__text">
-          A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.
+          {review.comment}
         </p>
-        <time className="reviews__time" dateTime="2019-04-24">April 2019</time>
+        <time className="reviews__time" dateTime="2019-04-24">{date.getDay()}</time>
       </div>
     </li>);
 }
