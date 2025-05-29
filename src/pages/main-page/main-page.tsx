@@ -5,14 +5,19 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { CITY } from '../../mocks/city';
 import Map from '../../components/map/map';
+import { useAppSelector } from '../../hooks';
 
 type MainPageProps = {
   offersCount: number;
   offers: Offers;
 }
 
-function MainPage({ offersCount, offers }: MainPageProps): JSX.Element {
+function MainPage({ offersCount, offers: allOffers }: MainPageProps): JSX.Element {
   const [activeId, setActiveId] = useState<string>();
+
+  const selectedCity = useAppSelector((state) => state.city);
+
+  const offers = allOffers.filter((offer) => offer.city.name === selectedCity);
 
   const handleChangeActiveId = (id?: string) => setActiveId(id);
 
