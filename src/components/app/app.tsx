@@ -7,7 +7,7 @@ import FavoritesPage from '../../pages/favorites-page/favorites-page';
 import PrivateRoute from '../private-route/private-route';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { addOffers } from '../../store/action';
+import { initOffers } from '../../store/action';
 import { offers as mockOffers } from '../../mocks/offers';
 // импортировали моковые офферы
 
@@ -18,7 +18,7 @@ type AppProps = {
 function App({ offersCount }: AppProps): JSX.Element {
 
   const dispatch = useAppDispatch();
-  dispatch(addOffers({ offers: mockOffers }));
+  dispatch(initOffers({ offers: mockOffers }));
   // внесли моковые офферы в состояние
   const offers = useAppSelector((state) => state.offers);
   // и тут же использовали офферы из состояния

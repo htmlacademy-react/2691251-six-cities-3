@@ -1,5 +1,5 @@
 import { MouseEvent } from 'react';
-import { changeCity } from '../../store/action';
+import { changeActiveCity } from '../../store/action';
 import { useAppDispatch } from '../../hooks';
 
 type CitiesListProps = {
@@ -14,7 +14,7 @@ function CitiesList({ citiesList, selectedCity }: CitiesListProps): JSX.Element 
   const onCityClick = (evt: MouseEvent<HTMLSpanElement>) => {
     evt.preventDefault();
     if (evt.currentTarget.textContent) {
-      dispatch(changeCity({ city: evt.currentTarget.textContent }));
+      dispatch(changeActiveCity({ city: evt.currentTarget.textContent }));
     }
   };
 
