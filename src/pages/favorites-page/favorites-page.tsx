@@ -32,12 +32,12 @@ function FavoritesPage({ offers }: FavoritesPageProps): JSX.Element {
             <nav className="header__nav">
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
-                  <link className="header__nav-link header__nav-link--profile" href="#">
+                  <Link className="header__nav-link header__nav-link--profile" to="#">
                     <div className="header__avatar-wrapper user__avatar-wrapper">
                     </div>
                     <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
                     <span className="header__favorite-count">{filteredOffers.length}</span>
-                  </link>
+                  </Link>
                 </li>
                 <li className="header__nav-item">
                   <Link className="header__nav-link" to={AppRoute.Login}>
@@ -61,9 +61,9 @@ function FavoritesPage({ offers }: FavoritesPageProps): JSX.Element {
                   <li key={keyValue} className="favorites__locations-items">
                     <div className="favorites__locations locations locations--current">
                       <div className="locations__item">
-                        <link className="locations__item-link" href="#">
+                        <Link className="locations__item-link" to="#">
                           <span>{city}</span>
-                        </link>
+                        </Link>
                       </div>
                     </div>
                     <div className="favorites__places">
@@ -75,9 +75,9 @@ function FavoritesPage({ offers }: FavoritesPageProps): JSX.Element {
                               <span>Premium</span>
                             </div>
                             <div className="favorites__image-wrapper place-card__image-wrapper">
-                              <link href="#">
+                              <Link to="#">
                                 <img className="place-card__image" src={offer.previewImage} width="150" height="110" alt="Place image" />
-                              </link>
+                              </Link>
                             </div>
                             <div className="favorites__card-info place-card__info">
                               <div className="place-card__price-wrapper">
@@ -99,7 +99,7 @@ function FavoritesPage({ offers }: FavoritesPageProps): JSX.Element {
                                 </div>
                               </div>
                               <h2 className="place-card__name">
-                                <link href="#">{offer.title}</link>
+                                <Link to="#">{offer.title}</Link>
                               </h2>
                               <p className="place-card__type">{offer.type}</p>
                             </div>
@@ -117,9 +117,9 @@ function FavoritesPage({ offers }: FavoritesPageProps): JSX.Element {
         </div>
       </main>
       <footer className="footer container">
-        <link className="footer__logo-link" href="main.html">
+        <Link className="footer__logo-link" to="main.html">
           <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33" />
-        </link>
+        </Link>
       </footer>
     </div>);
 }
