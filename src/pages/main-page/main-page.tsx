@@ -3,7 +3,7 @@ import SortList from '../../components/sort-list/sort-list';
 import { AppRoute, citiesList } from '../../const';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import { CITY } from '../../mocks/city';
+import { CITIES } from '../../mocks/cities';
 import Map from '../../components/map/map';
 import { useAppSelector } from '../../hooks';
 import CitiesList from '../../components/cities-list/cities-list';
@@ -79,7 +79,7 @@ function MainPage(): JSX.Element {
                 className={`${offers.length === 0 ? 'cities__map' : ''} map`}
               >
                 <Map
-                  city={CITY}
+                  city={CITIES[3]}
                   offers={offers}
                 />
 
