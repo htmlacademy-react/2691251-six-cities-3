@@ -24,6 +24,12 @@ function Map(props: MapProps): JSX.Element {
   const map = useMap(mapRef, city);
 
   useEffect(() => {
+    if(map) {
+      map.setView([city.location.latitude, city.location.longitude], city.location.zoom);
+    }
+  });
+
+  useEffect(() => {
     if (map) {
       const markerLayer = layerGroup().addTo(map);
       offers.forEach((point) => {

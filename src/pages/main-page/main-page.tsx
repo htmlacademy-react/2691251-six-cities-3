@@ -15,7 +15,7 @@ function MainPage(): JSX.Element {
 
   const selectedCity = useAppSelector((state) => state.city);
 
-  const offers = allOffers.filter((offer) => offer.city.name === selectedCity);
+  const offers = allOffers.filter((offer) => offer.city.name === selectedCity.name);
 
   const handleChangeActiveId = (id?: string) => setActiveId(id);
 
@@ -64,7 +64,7 @@ function MainPage(): JSX.Element {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offers.length} places to stay in {selectedCity}</b>
+              <b className="places__found">{offers.length} places to stay in {selectedCity.name}</b>
               <SortList />
               <div className="cities__places-list places__list tabs__content">
                 < OffersList
@@ -79,7 +79,7 @@ function MainPage(): JSX.Element {
                 className={`${offers.length === 0 ? 'cities__map' : ''} map`}
               >
                 <Map
-                  city={CITIES[3]}
+                  city={selectedCity}
                   offers={offers}
                 />
 

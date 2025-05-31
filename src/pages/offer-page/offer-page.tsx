@@ -2,7 +2,6 @@ import { Offers } from '../../types/offer';
 import ReviewForm from '../../components/review-form/review-form';
 import NearOffersList from '../../components/near-offers-list/near-offers-list';
 import Map from '../../components/map/map';
-import { CITIES } from '../../mocks/cities';
 import ReviewsList from '../../components/reviews-list/reviews-list';
 import { Link, useParams } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
@@ -186,7 +185,7 @@ function OfferPage({ offers, authorizationStatus }: OfferPageProps): JSX.Element
               className={`${offers.length === 0 ? 'offer__map map' : ''} map`}
             >
               <Map
-                city={CITIES[3]}
+                city={offer.city}
                 offers={offers}
               />
             </section>
