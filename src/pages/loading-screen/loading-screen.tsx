@@ -1,5 +1,5 @@
 import './style.css';
-function Loader(): JSX.Element {
+function LoadingScreen(): JSX.Element {
   return (
     <div id="wrapper">
       <div className="loader">
@@ -11,4 +11,4 @@ function Loader(): JSX.Element {
     </div>);
 }
 
-export default Loader;
+export default LoadingScreen;

@@ -1,12 +1,10 @@
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
-import { Offers, Offer } from '../../types/offer';
+import { Offer } from '../../types/offer';
+import { useAppSelector } from '../../hooks';
 
-type FavoritesPageProps = {
-  offers: Offers;
-}
-
-function FavoritesPage({ offers }: FavoritesPageProps): JSX.Element {
+function FavoritesPage(): JSX.Element {
+  const offers = useAppSelector((state) => state.offers);
 
   const filteredOffers = offers.filter((offer) => offer.isFavorite === true);
 

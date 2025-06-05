@@ -6,27 +6,24 @@ import OfferPage from '../../pages/offer-page/offer-page';
 import FavoritesPage from '../../pages/favorites-page/favorites-page';
 import PrivateRoute from '../private-route/private-route';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { initOffers } from '../../store/action';
-import { offers as mockOffers } from '../../mocks/offers';
-import { useEffect } from 'react';
-// импортировали моковые офферы
+import { useAppSelector } from '../../hooks';
+import LoadingScreen from '../../pages/loading-screen/loading-screen';
 
 function App(): JSX.Element {
+  const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
 
-  const dispatch = useAppDispatch();
-  useEffect(() => {
-    dispatch(initOffers({ offers: mockOffers }));
-  },[dispatch]);
-  // внесли моковые офферы в состояние
-  const offers = useAppSelector((state) => state.offers);
-  // и тут же использовали офферы из состояния
+  if (isOffersDataLoading) {
+    return (
+      <LoadingScreen />
+    );
+  }
+
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={AppRoute.Main}
-          element={<MainPage/>}
+          element={<MainPage />}
         />
         <Route
           path={AppRoute.Login}
@@ -38,13 +35,13 @@ function App(): JSX.Element {
             <PrivateRoute
               authorizationStatus={AuthorizationStatus.Auth}
             >
-              <FavoritesPage offers={offers} />
+              <FavoritesPage/>
             </PrivateRoute>
           }
         />
         <Route
           path={AppRoute.OfferWithId}
-          element={<OfferPage offers={offers} authorizationStatus={AuthorizationStatus.Auth} />}
+          element={<OfferPage authorizationStatus={AuthorizationStatus.Auth} />}
         />
         <Route
           path="*"
