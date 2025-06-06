@@ -187,6 +187,7 @@ function OfferPage({ authorizationStatus }: OfferPageProps): JSX.Element {
               <Map
                 city={offer.city}
                 offers={offers}
+                activeId={offer.id}
               />
             </section>
           </section>
