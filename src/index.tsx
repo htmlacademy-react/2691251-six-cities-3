@@ -5,6 +5,9 @@ import ErrorMessage from './components/error-message/error-message';
 import { Provider } from 'react-redux';
 import { store } from './store';
 import { fetchOffersAction } from './store/api-actions';
+import {checkAuthAction} from './store/api-actions';
+
+store.dispatch(checkAuthAction());
 
 store.dispatch(fetchOffersAction());
 
