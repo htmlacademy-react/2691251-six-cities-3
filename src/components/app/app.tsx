@@ -10,9 +10,10 @@ import { useAppSelector } from '../../hooks';
 import LoadingPage from '../../pages/loading-page/loading-page';
 
 function App(): JSX.Element {
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
 
-  if (isOffersDataLoading) {
+  if (authorizationStatus === AuthorizationStatus.Unknown || isOffersDataLoading) {
     return (
       <LoadingPage />
     );
@@ -33,9 +34,9 @@ function App(): JSX.Element {
           path={AppRoute.Favorites}
           element={
             <PrivateRoute
-              authorizationStatus={AuthorizationStatus.Auth}
+              authorizationStatus={authorizationStatus}
             >
-              <FavoritesPage/>
+              <FavoritesPage />
             </PrivateRoute>
           }
         />

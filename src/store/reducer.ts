@@ -7,16 +7,16 @@ import { AuthorizationStatus } from '../const';
 type StateType = {
   city: City;
   offers: Offer[];
-  isOffersDataLoading: boolean;
   authorizationStatus: AuthorizationStatus;
+  isOffersDataLoading: boolean;
   error: string | null;
 }
 
 const initialState: StateType = {
   city: CITIES[0],
   offers: [],
-  isOffersDataLoading: false,
   authorizationStatus: AuthorizationStatus.Unknown,
+  isOffersDataLoading: false,
   error: null,
 };
 
@@ -30,11 +30,11 @@ const reducer = createReducer(initialState, (builder) => {
       const offers = action.payload;
       state.offers = offers;
     })
-    .addCase(requireAuthorization, (state, action) => {
-      state.authorizationStatus = action.payload;
-    })
     .addCase(setOffersDataLoadingStatus, (state, action) => {
       state.isOffersDataLoading = action.payload;
+    })
+    .addCase(requireAuthorization, (state, action) => {
+      state.authorizationStatus = action.payload;
     })
     .addCase(setError, (state, action) => {
       state.error = action.payload;
