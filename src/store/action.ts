@@ -11,7 +11,9 @@ export const setOffersDataLoadingStatus = createAction<boolean>('data/setOffersD
 
 export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
 
-export const setError = createAction<string | null>('game/setError');
+export const setError = createAction<string | null>('app/setError');
+
+export const setUserEmail = createAction<string>('app/setUserEmail');
 
 export const redirectToRoute = createAction<AppRoute>('app/redirectToRoute');
 

@@ -6,6 +6,7 @@ import { logoutAction } from '../../store/api-actions';
 
 function Header(): JSX.Element {
   const authenticationStatus = useAppSelector((state) => state.authorizationStatus);
+  const userEmail = useAppSelector((state) => state.userEmail);
 
   const dispatch = useAppDispatch();
 
@@ -33,7 +34,7 @@ function Header(): JSX.Element {
                   <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Favorites}>
                     <div className="header__avatar-wrapper user__avatar-wrapper">
                     </div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
+                    <span className="header__user-name user__name">{userEmail}</span>
                     <span className="header__favorite-count">3</span>
                   </Link>
                 </li>
