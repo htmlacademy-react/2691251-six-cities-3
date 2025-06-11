@@ -3,9 +3,10 @@ import Header from '../../components/header/header';
 import { Offer } from '../../types/offer';
 import { useAppSelector } from '../../hooks';
 import FavoritesEmpty from '../../components/favorites-empty/favorites-empty';
+import { getOffers } from '../../store/app-data/selectors';
 
 function FavoritesPage(): JSX.Element {
-  const offers = useAppSelector((state) => state.offers);
+  const offers = useAppSelector(getOffers);
 
   const filteredOffers = offers.filter((offer) => offer.isFavorite === true);
 

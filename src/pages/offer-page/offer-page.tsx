@@ -8,12 +8,14 @@ import { AuthorizationStatus } from '../../const';
 import Header from '../../components/header/header';
 import { mockReviews } from '../../mocks/review';
 import { useAppSelector } from '../../hooks';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
+import { getOffers } from '../../store/app-data/selectors';
 
 function OfferPage(): JSX.Element {
 
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
-  const offers = useAppSelector((state) => state.offers);
+  const offers = useAppSelector(getOffers);
   const params = useParams();
   const offer = offers.find((innerOffer) => innerOffer.id === params.id);
 

@@ -9,13 +9,15 @@ import CitiesList from '../../components/cities-list/cities-list';
 import { SortOption } from '../../components/sort-list/const';
 import { Offer } from '../../types/offer';
 import MainEmpty from '../../components/main-empty/main-empty';
+import { getOffers } from '../../store/app-data/selectors';
+import { getCity } from '../../store/app-process/selectors';
 
 function MainPage(): JSX.Element {
-  const selectedCity = useAppSelector((state) => state.city);
+  const selectedCity = useAppSelector(getCity);
 
   const [activeSort, setActiveSort] = useState(SortOption.Popular);
 
-  const allOffers = useAppSelector((state) => state.offers);
+  const allOffers = useAppSelector(getOffers);
 
   const offers = allOffers.filter((offer) => offer.city.name === selectedCity.name);
 

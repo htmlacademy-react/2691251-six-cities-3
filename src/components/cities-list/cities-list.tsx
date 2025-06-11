@@ -1,9 +1,9 @@
 import { MouseEvent } from 'react';
-import { changeActiveCity } from '../../store/action';
 import { useAppDispatch } from '../../hooks';
 import { Link } from 'react-router-dom';
 import { City } from '../../types/offer';
 import { CITIES } from '../../mocks/cities';
+import { changeActiveCity } from '../../store/app-process/app-process';
 
 type CitiesListProps = {
   citiesList: City[];
