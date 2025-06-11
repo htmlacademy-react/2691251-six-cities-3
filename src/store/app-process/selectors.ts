@@ -4,4 +4,3 @@ import { City } from '../../types/offer';
 
 export const getCity = (state: State): City => state[NameSpace.App].city;
 export const getUserEmail = (state: State): string => state[NameSpace.App].userEmail;
-export const getErrorStatus = (state: State): string|null => state[NameSpace.App].error;

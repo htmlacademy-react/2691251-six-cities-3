@@ -9,7 +9,6 @@ export type AppData = {
 
 export type AppProcess = {
   city: City;
-  error: null|string;
   userEmail: string;
 };
 

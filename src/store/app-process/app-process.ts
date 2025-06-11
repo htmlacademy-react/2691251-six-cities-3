@@ -6,7 +6,6 @@ import { City } from '../../types/offer';
 
 const initialState: AppProcess = {
   city: CITIES[0],
-  error: null,
   userEmail: ''
 };
 
@@ -14,9 +13,6 @@ export const appProcess = createSlice({
   name: NameSpace.App,
   initialState,
   reducers: {
-    setError: (state, action: PayloadAction<null|string>) => {
-      state.error = action.payload;
-    },
     changeActiveCity: (state, action: PayloadAction<{ city: City }>) => {
       const { city } = action.payload;
       state.city = city;
@@ -27,4 +23,4 @@ export const appProcess = createSlice({
   },
 });
 
-export const {setError, changeActiveCity, setUserEmail} = appProcess.actions;
+export const {changeActiveCity, setUserEmail} = appProcess.actions;

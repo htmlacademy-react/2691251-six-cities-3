@@ -3,23 +3,11 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../types/state.js';
 import { Offer } from '../types/offer.js';
 import {redirectToRoute} from './action';
-import { APIRoute, AppRoute, TIMEOUT_SHOW_ERROR } from '../const';
-import { store } from './';
+import { APIRoute, AppRoute} from '../const';
 import { saveToken, dropToken } from '../services/token';
 import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
-import { setError } from './app-process/app-process.js';
 import { setUserEmail } from './app-process/app-process.js';
-
-export const clearErrorAction = createAsyncThunk(
-  'app/clearError',
-  () => {
-    setTimeout(
-      () => store.dispatch(setError(null)),
-      TIMEOUT_SHOW_ERROR,
-    );
-  },
-);
 
 export const fetchOffersAction = createAsyncThunk<Offer[], undefined, {
   dispatch: AppDispatch;
