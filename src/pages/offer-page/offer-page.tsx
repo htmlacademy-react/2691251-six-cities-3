@@ -11,13 +11,13 @@ import { Navigate } from 'react-router-dom';
 import { useActionCreators } from '../../hooks/store';
 import { AuthorizationStatus } from '../../const';
 import Header from '../../components/header/header';
-import { mockReviews } from '../../mocks/review';
 import { useAppSelector } from '../../hooks';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
 import { getOffers } from '../../store/app-data/selectors';
 import { offerActions } from '../../store/offer/offer';
 import { reviewsActions } from '../../store/review/review';
 import { getFullOffer, getNearByOffers, getOfferStatus } from '../../store/offer/selectors';
+import { getReviews } from '../../store/review/selectors';
 import OfferContainer from '../../components/offer-contanier/offer-container';
 
 const MAX_COUNT_NEAR_OFFERS = 3;
@@ -34,6 +34,7 @@ function OfferPage(): JSX.Element {
   const fullOffer = useAppSelector(getFullOffer);
   const status = useAppSelector(getOfferStatus);
   const nearByOffers = useAppSelector(getNearByOffers);
+  const reviews = useAppSelector(getReviews);
 
   const offers = useAppSelector(getOffers);
 
@@ -78,10 +79,10 @@ function OfferPage(): JSX.Element {
               <div className="offer__wrapper">
                 <OfferContainer offer={fullOffer} />
                 <section className="offer__reviews reviews">
-                  {mockReviews.length > 0 &&
+                  {reviews.length > 0 &&
                     <>
-                      <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{mockReviews.length}</span></h2>
-                      <ReviewsList reviews={mockReviews} />
+                      <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
+                      <ReviewsList reviews={reviews} />
                     </>}
                   {authorizationStatus === AuthorizationStatus.Auth && < ReviewForm />}
                 </section>
