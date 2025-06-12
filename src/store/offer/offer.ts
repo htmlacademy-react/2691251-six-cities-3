@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { FullOffer, Offer } from '../../types/offer';
 import { fetchFullOffer, fetchNearByOffers, postFavorite } from '../api-actions';
 import { RequestStatus } from '../../const';
@@ -7,12 +7,14 @@ type OfferState = {
   info: FullOffer | null;
   nearby: Offer[];
   status: RequestStatus;
+  activeId?: Offer['id'] | null;
 };
 
 const initialState: OfferState = {
   info: null,
   nearby: [],
-  status: RequestStatus.Idle
+  status: RequestStatus.Idle,
+  activeId: null
 };
 
 const offerSlice = createSlice({
@@ -23,6 +25,9 @@ const offerSlice = createSlice({
       state.info = null;
       state.nearby = [];
       state.status = RequestStatus.Idle;
+    },
+    setActiveId(state, action: PayloadAction<Offer['id'] | undefined>) {
+      state.activeId = action.payload;
     }
   },
   extraReducers: (builder) => {
@@ -51,6 +56,6 @@ const offerSlice = createSlice({
   },
 });
 
-const offerActions = {...offerSlice.actions, fetchNearByOffers, fetchFullOffer};
+const offerActions = { ...offerSlice.actions, fetchNearByOffers, fetchFullOffer };
 
 export { offerActions, offerSlice };
