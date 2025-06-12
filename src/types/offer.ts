@@ -20,9 +20,27 @@ export type Offer = {
   rating: number;
 }
 
+export type Offers = Offer[]
+
 export type City = {
   name: string;
   location: Location;
 };
 
-export type Offers = Offer[];
+export type FullOffer = Offer & {
+  description: string;
+  bedrooms: number;
+  goods: string[];
+  host: {
+    name: string;
+    avatarUrl: string;
+    isPro: boolean;
+  };
+  images: string[];
+  maxAdults: number;
+};
+
+export type FavoriteData = {
+  id: FullOffer['id'];
+  isFavorite: boolean;
+}

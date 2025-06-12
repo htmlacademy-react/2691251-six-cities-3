@@ -23,6 +23,8 @@ export enum APIRoute {
   Offers = '/offers',
   Login = '/login',
   Logout = '/logout',
+  Comments = '/comments',
+  Favorites = '/favorite'
 }
 
 
@@ -30,4 +32,12 @@ export enum NameSpace {
   Data = 'DATA',
   App = 'APP',
   User = 'USER',
+  Offer = 'OFFER'
+}
+
+export const enum RequestStatus {
+  Idle,
+  Loading,
+  Success,
+  Failed
 }
