@@ -84,7 +84,7 @@ function OfferPage(): JSX.Element {
                       <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
                       <ReviewsList reviews={reviews} />
                     </>}
-                  {authorizationStatus === AuthorizationStatus.Auth && < ReviewForm />}
+                  {authorizationStatus === AuthorizationStatus.Auth && < ReviewForm offerId={fullOffer.id} />}
                 </section>
               </div>
             </div>

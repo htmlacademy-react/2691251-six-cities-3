@@ -1,22 +1,70 @@
 import { useState, FormEvent, ChangeEvent } from 'react';
+import { FullOffer } from '../../types/offer';
+import { reviewsActions } from '../../store/review/review';
+import { useAppDispatch } from '../../hooks';
+import { toast } from 'react-toastify';
 
-function ReviewForm(): JSX.Element {
+type ReviewsFormProps = {
+  offerId: FullOffer['id'] | undefined;
+}
+
+type Form = HTMLFormElement & {
+  rating: RadioNodeList;
+  review: HTMLTextAreaElement;
+}
+
+const MAX_COMMENT_LENGTH = 300;
+const MIN_COMMENT_LENGTH = 50;
+
+function ReviewForm({ offerId }: ReviewsFormProps): JSX.Element {
+
+  const dispatch = useAppDispatch();
+
   const [userReview, setUserReview] = useState({
     rating: '',
-    review: ''
+    review: '',
+    isformDisabled: false
   });
-  // console.log(userReview); // выводит содержание формы в состоянии
+
+  const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+
+    const form = evt.currentTarget as Form;
+    const reviewContent = {
+      body: {
+        comment: userReview.review,
+        rating: Number(userReview.rating)
+      },
+      offerId
+    };
+    setUserReview({ ...userReview, isformDisabled: true });
+    toast.promise(dispatch(reviewsActions.postReview(reviewContent)).unwrap(), {
+      pending: 'Sending',
+      success: {
+        render: () => {
+          setUserReview({ ...userReview, isformDisabled: false });
+          form.reset();
+          return 'Sent!';
+        }
+      },
+      error: {
+        render() {
+          setUserReview({ ...userReview, isformDisabled: false });
+          return 'Failed to send';
+        }
+      }
+    });
+  };
+
   return (
     <form className="reviews__form form"
       action="#"
       method="post"
-      onSubmit={(evt: FormEvent<HTMLFormElement>) => {
-        evt.preventDefault();
-      }}
+      onSubmit={handleFormSubmit}
     >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
-        <input className="form__rating-input visually-hidden" name="rating" value="5" id="5-stars" type="radio"
+        <input className="form__rating-input visually-hidden" name="rating" value="5" id="5-stars" type="radio" disabled={userReview.isformDisabled}
           onChange={(evt: ChangeEvent<HTMLInputElement>) => {
             const { name, value } = evt.target;
             setUserReview({ ...userReview, [name]: value });
@@ -28,7 +76,7 @@ function ReviewForm(): JSX.Element {
           </svg>
         </label>
 
-        <input className="form__rating-input visually-hidden" name="rating" value="4" id="4-stars" type="radio"
+        <input className="form__rating-input visually-hidden" name="rating" value="4" id="4-stars" type="radio" disabled={userReview.isformDisabled}
           onChange={(evt: ChangeEvent<HTMLInputElement>) => {
             const { name, value } = evt.target;
             setUserReview({ ...userReview, [name]: value });
@@ -40,7 +88,7 @@ function ReviewForm(): JSX.Element {
           </svg>
         </label>
 
-        <input className="form__rating-input visually-hidden" name="rating" value="3" id="3-stars" type="radio"
+        <input className="form__rating-input visually-hidden" name="rating" value="3" id="3-stars" type="radio" disabled={userReview.isformDisabled}
           onChange={(evt: ChangeEvent<HTMLInputElement>) => {
             const { name, value } = evt.target;
             setUserReview({ ...userReview, [name]: value });
@@ -52,7 +100,7 @@ function ReviewForm(): JSX.Element {
           </svg>
         </label>
 
-        <input className="form__rating-input visually-hidden" name="rating" value="2" id="2-stars" type="radio"
+        <input className="form__rating-input visually-hidden" name="rating" value="2" id="2-stars" type="radio" disabled={userReview.isformDisabled}
           onChange={(evt: ChangeEvent<HTMLInputElement>) => {
             const { name, value } = evt.target;
             setUserReview({ ...userReview, [name]: value });
@@ -64,7 +112,7 @@ function ReviewForm(): JSX.Element {
           </svg>
         </label>
 
-        <input className="form__rating-input visually-hidden" name="rating" value="1" id="1-star" type="radio"
+        <input className="form__rating-input visually-hidden" name="rating" value="1" id="1-star" type="radio" disabled={userReview.isformDisabled}
           onChange={(evt: ChangeEvent<HTMLInputElement>) => {
             const { name, value } = evt.target;
             setUserReview({ ...userReview, [name]: value });
@@ -76,7 +124,15 @@ function ReviewForm(): JSX.Element {
           </svg>
         </label>
       </div>
-      <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved"
+      <textarea
+        className="reviews__textarea form__textarea"
+        id="review"
+        maxLength={MAX_COMMENT_LENGTH}
+        minLength={MIN_COMMENT_LENGTH}
+        required
+        disabled={userReview.isformDisabled}
+        name="review"
+        placeholder="Tell how was your stay, what you like and what can be improved"
         onChange={(evt: ChangeEvent<HTMLTextAreaElement>) => {
           const { name, value } = evt.target;
           setUserReview({ ...userReview, [name]: value });
@@ -88,7 +144,12 @@ function ReviewForm(): JSX.Element {
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" disabled={false}>Submit</button>
+        <button
+          className="reviews__submit form__submit button"
+          type="submit"
+          disabled={!userReview.rating || userReview.review.length < MIN_COMMENT_LENGTH || userReview.isformDisabled}
+        >Submit
+        </button>
       </div>
     </form>);
 }
