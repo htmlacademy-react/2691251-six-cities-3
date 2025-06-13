@@ -2,7 +2,7 @@ import OffersList from '../../components/offers-list/offers-list';
 import SortList from '../../components/sort-list/sort-list';
 import Header from '../../components/header/header';
 import { useState } from 'react';
-import { CITIES } from '../../mocks/cities';
+import { CITIES } from '../../const';
 import Map from '../../components/map/map';
 import { useAppSelector } from '../../hooks';
 import CitiesList from '../../components/cities-list/cities-list';

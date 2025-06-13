@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { NameSpace } from '../../const';
 import { AppProcess } from '../../types/state';
-import { CITIES } from '../../mocks/cities';
+import { CITIES } from '../../const';
 import { City } from '../../types/offer';
 
 const initialState: AppProcess = {

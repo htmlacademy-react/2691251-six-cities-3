@@ -2,7 +2,7 @@ import { MouseEvent } from 'react';
 import { useAppDispatch } from '../../hooks';
 import { Link } from 'react-router-dom';
 import { City } from '../../types/offer';
-import { CITIES } from '../../mocks/cities';
+import { CITIES } from '../../const';
 import { changeActiveCity } from '../../store/app-process/app-process';
 
 type CitiesListProps = {
