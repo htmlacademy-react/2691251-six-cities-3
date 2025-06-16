@@ -84,7 +84,8 @@ export enum NameSpace {
   App = 'APP',
   User = 'USER',
   Offer = 'OFFER',
-  Review = 'REVIEW'
+  Review = 'REVIEW',
+  Favorites = 'FAVORITES'
 }
 
 export const enum RequestStatus {
