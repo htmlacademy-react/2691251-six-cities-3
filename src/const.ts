@@ -63,6 +63,11 @@ export enum CardClass {
   Cities = 'cities'
 }
 
+export enum BookmarkClass{
+  Offer = 'offer',
+  PlaceCard = 'place-card'
+}
+
 export enum AppRoute {
   Login = '/login',
   OfferWithId = '/offer/:id',
