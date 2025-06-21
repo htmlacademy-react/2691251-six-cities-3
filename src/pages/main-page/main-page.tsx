@@ -72,7 +72,7 @@ function MainPage(): JSX.Element {
               <>
                 <section className="cities__places places">
                   <h2 className="visually-hidden">Places</h2>
-                  <b className="places__found">{offers.length} places to stay in {selectedCity.name}</b>
+                  <b className="places__found">{`${offers.length} place${offers.length === 1 ? '' : 's'} to stay in ${selectedCity.name}`}</b>
                   <SortList current={activeSort} setter={setActiveSort} />
                   <div className="cities__places-list places__list tabs__content">
                     < OffersList
