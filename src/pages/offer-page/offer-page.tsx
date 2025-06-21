@@ -89,7 +89,7 @@ function OfferPage(): JSX.Element {
           </div>
           <section
             style={{ width: '100%' }}
-            className={`${offers.length === 0 ? 'offer__map map' : ''} map`}
+            className={offers.length === 0 ? 'map' : 'offer__map map'}
           >
             <Map
               city={fullOffer.city}
