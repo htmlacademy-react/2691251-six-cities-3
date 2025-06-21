@@ -12,7 +12,6 @@ import { AuthorizationStatus } from '../../const';
 import Header from '../../components/header/header';
 import { useAppSelector } from '../../hooks';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
-import { getOffers } from '../../store/app-data/selectors';
 import { offerActions } from '../../store/offer/offer';
 import { reviewsActions } from '../../store/review/review';
 import { getFullOffer, getNearByOffers, getOfferStatus } from '../../store/offer/selectors';
@@ -35,8 +34,6 @@ function OfferPage(): JSX.Element {
   const status = useAppSelector(getOfferStatus);
   const nearByOffers = useAppSelector(getNearByOffers);
   const reviews = useAppSelector(getReviews);
-
-  const offers = useAppSelector(getOffers);
 
   const { setActiveId, fetchNearByOffers, fetchFullOffer, fetchReviews, clearOffer } =
     useActionCreators(allActions);
@@ -87,16 +84,12 @@ function OfferPage(): JSX.Element {
               </section>
             </div>
           </div>
-          <section
-            style={{ width: '100%' }}
-            className={offers.length === 0 ? 'map' : 'offer__map map'}
-          >
-            <Map
-              city={fullOffer.city}
-              offers={nearOffersPlusCurrent}
-              activeId={fullOffer.id}
-            />
-          </section>
+          <Map
+            city={fullOffer.city}
+            offers={nearOffersPlusCurrent}
+            activeId={fullOffer.id}
+            place="offer"
+          />
         </section>
         <div className="container">
           <section className="near-places places">

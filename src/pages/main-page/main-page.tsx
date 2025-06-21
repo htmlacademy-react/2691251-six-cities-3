@@ -82,17 +82,12 @@ function MainPage(): JSX.Element {
                   </div>
                 </section>
                 <div className="cities__right-section">
-                  <section
-                    style={{ width: '100%' }}
-                    className={`${offers.length === 0 ? 'cities__map' : ''} map`}
-                  >
-                    {offers.length === 0 ? '' :
-                      <Map
-                        city={selectedCity}
-                        offers={offers}
-                        activeId={activeId}
-                      />}
-                  </section>
+                  {offers.length === 0 ? '' :
+                    <Map
+                      city={selectedCity}
+                      offers={offers}
+                      activeId={activeId}
+                    />}
                 </div>
               </>}
           </div>
