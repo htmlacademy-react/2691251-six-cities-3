@@ -7,10 +7,9 @@ type NearOffersListProps = {
 }
 
 function NearOffersList({ offers}: NearOffersListProps): JSX.Element {
-  const slicedOffers = offers.slice(0,3);
   return (
     <>
-      {slicedOffers.map((offer, id) => {
+      {offers.map((offer, id) => {
         const keyValue = `${id}-${offer.id}`;
         return (
           <Card

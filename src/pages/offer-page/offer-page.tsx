@@ -22,12 +22,12 @@ import NotFoundPage from '../not-found-page/not-found-page';
 
 const MAX_COUNT_NEAR_OFFERS = 3;
 
-function OfferPage(): JSX.Element {
+const allActions = {
+  ...offerActions,
+  ...reviewsActions
+};
 
-  const allActions = {
-    ...offerActions,
-    ...reviewsActions
-  };
+function OfferPage(): JSX.Element {
 
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
@@ -62,8 +62,8 @@ function OfferPage(): JSX.Element {
     return <LoadingPage />;
   }
 
-  const nearbyOffers = nearByOffers && nearByOffers.slice(0, MAX_COUNT_NEAR_OFFERS);
-  const nearOffersPlusCurrent = [fullOffer, ...nearbyOffers];
+  const slicedNearByOffers = nearByOffers && nearByOffers.slice(0, MAX_COUNT_NEAR_OFFERS);
+  const nearOffersPlusCurrent = [fullOffer, ...slicedNearByOffers];
 
   return (
     <div className="page">
@@ -102,7 +102,7 @@ function OfferPage(): JSX.Element {
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
-              <NearOffersList offers={nearByOffers} />
+              <NearOffersList offers={slicedNearByOffers} />
             </div>
           </section>
         </div>
