@@ -56,6 +56,8 @@ function ReviewForm({ offerId }: ReviewsFormProps): JSX.Element {
     });
   };
 
+  const isSubmitDisabled = [!userReview.rating, userReview.review.length < MIN_COMMENT_LENGTH, userReview.isformDisabled, userReview.review.length > MAX_COMMENT_LENGTH].some((element) => element === true);
+
   return (
     <form className="reviews__form form"
       action="#"
@@ -127,7 +129,6 @@ function ReviewForm({ offerId }: ReviewsFormProps): JSX.Element {
       <textarea
         className="reviews__textarea form__textarea"
         id="review"
-        maxLength={MAX_COMMENT_LENGTH}
         minLength={MIN_COMMENT_LENGTH}
         required
         disabled={userReview.isformDisabled}
@@ -147,7 +148,7 @@ function ReviewForm({ offerId }: ReviewsFormProps): JSX.Element {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled={!userReview.rating || userReview.review.length < MIN_COMMENT_LENGTH || userReview.isformDisabled}
+          disabled={isSubmitDisabled}
         >Submit
         </button>
       </div>
