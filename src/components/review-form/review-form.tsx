@@ -68,7 +68,7 @@ function ReviewForm({ offerId }: ReviewsFormProps): JSX.Element {
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         <input className="form__rating-input visually-hidden" name="rating" value="5" id="5-stars" type="radio" disabled={userReview.isformDisabled}
-          onChange={(evt: ChangeEvent<HTMLInputElement>) => {
+          onInput={(evt: ChangeEvent<HTMLInputElement>) => {
             const { name, value } = evt.target;
             setUserReview({ ...userReview, [name]: value });
           }}
@@ -80,7 +80,7 @@ function ReviewForm({ offerId }: ReviewsFormProps): JSX.Element {
         </label>
 
         <input className="form__rating-input visually-hidden" name="rating" value="4" id="4-stars" type="radio" disabled={userReview.isformDisabled}
-          onChange={(evt: ChangeEvent<HTMLInputElement>) => {
+          onInput={(evt: ChangeEvent<HTMLInputElement>) => {
             const { name, value } = evt.target;
             setUserReview({ ...userReview, [name]: value });
           }}
@@ -92,7 +92,7 @@ function ReviewForm({ offerId }: ReviewsFormProps): JSX.Element {
         </label>
 
         <input className="form__rating-input visually-hidden" name="rating" value="3" id="3-stars" type="radio" disabled={userReview.isformDisabled}
-          onChange={(evt: ChangeEvent<HTMLInputElement>) => {
+          onInput={(evt: ChangeEvent<HTMLInputElement>) => {
             const { name, value } = evt.target;
             setUserReview({ ...userReview, [name]: value });
           }}
@@ -104,7 +104,7 @@ function ReviewForm({ offerId }: ReviewsFormProps): JSX.Element {
         </label>
 
         <input className="form__rating-input visually-hidden" name="rating" value="2" id="2-stars" type="radio" disabled={userReview.isformDisabled}
-          onChange={(evt: ChangeEvent<HTMLInputElement>) => {
+          onInput={(evt: ChangeEvent<HTMLInputElement>) => {
             const { name, value } = evt.target;
             setUserReview({ ...userReview, [name]: value });
           }}
@@ -116,7 +116,7 @@ function ReviewForm({ offerId }: ReviewsFormProps): JSX.Element {
         </label>
 
         <input className="form__rating-input visually-hidden" name="rating" value="1" id="1-stars" type="radio" disabled={userReview.isformDisabled}
-          onChange={(evt: ChangeEvent<HTMLInputElement>) => {
+          onInput={(evt: ChangeEvent<HTMLInputElement>) => {
             const { name, value } = evt.target;
             setUserReview({ ...userReview, [name]: value });
           }}
