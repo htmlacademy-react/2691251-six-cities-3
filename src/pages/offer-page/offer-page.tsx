@@ -18,8 +18,10 @@ import { getFullOffer, getNearByOffers, getOfferStatus } from '../../store/offer
 import { getReviews } from '../../store/review/selectors';
 import OfferContainer from '../../components/offer-contanier/offer-container';
 import NotFoundPage from '../not-found-page/not-found-page';
+import { sortReviewsByDate } from '../../utils';
 
 const MAX_COUNT_NEAR_OFFERS = 3;
+const MAX_REVIEWS = 10;
 
 const allActions = {
   ...offerActions,
@@ -34,6 +36,7 @@ function OfferPage(): JSX.Element {
   const status = useAppSelector(getOfferStatus);
   const nearByOffers = useAppSelector(getNearByOffers);
   const reviews = useAppSelector(getReviews);
+  const sortedReviews = reviews.toSorted(sortReviewsByDate).slice(0, MAX_REVIEWS);
 
   const { setActiveId, fetchNearByOffers, fetchFullOffer, fetchReviews, clearOffer } =
     useActionCreators(allActions);
@@ -78,7 +81,7 @@ function OfferPage(): JSX.Element {
                 {reviews && reviews.length > 0 &&
                   <>
                     <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
-                    <ReviewsList reviews={reviews} />
+                    <ReviewsList reviews={sortedReviews} />
                   </>}
                 {authorizationStatus === AuthorizationStatus.Auth && < ReviewForm offerId={fullOffer.id} />}
               </section>
