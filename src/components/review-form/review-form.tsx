@@ -42,7 +42,7 @@ function ReviewForm({ offerId }: ReviewsFormProps): JSX.Element {
       pending: 'Sending',
       success: {
         render: () => {
-          setUserReview({ ...userReview, isformDisabled: false });
+          setUserReview({ review: '', rating: '', isformDisabled: false });
           form.reset();
           return 'Sent!';
         }
@@ -56,7 +56,8 @@ function ReviewForm({ offerId }: ReviewsFormProps): JSX.Element {
     });
   };
 
-  const isSubmitDisabled = [!userReview.rating, userReview.review.length < MIN_COMMENT_LENGTH, userReview.isformDisabled, userReview.review.length > MAX_COMMENT_LENGTH].some((element) => element === true);
+  const submitFlags = [!userReview.rating, userReview.review.length < MIN_COMMENT_LENGTH, userReview.isformDisabled, userReview.review.length > MAX_COMMENT_LENGTH];
+  const isSubmitDisabled = submitFlags.some((element) => element === true);
 
   return (
     <form className="reviews__form form"
