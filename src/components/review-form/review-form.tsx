@@ -112,13 +112,13 @@ function ReviewForm({ offerId }: ReviewsFormProps): JSX.Element {
           </svg>
         </label>
 
-        <input className="form__rating-input visually-hidden" name="rating" value="1" id="1-star" type="radio" disabled={userReview.isformDisabled}
+        <input className="form__rating-input visually-hidden" name="rating" value="1" id="1-stars" type="radio" disabled={userReview.isformDisabled}
           onChange={(evt: ChangeEvent<HTMLInputElement>) => {
             const { name, value } = evt.target;
             setUserReview({ ...userReview, [name]: value });
           }}
         />
-        <label htmlFor="1-star" className="reviews__rating-label form__rating-label" title="terribly">
+        <label htmlFor="1-stars" className="reviews__rating-label form__rating-label" title="terribly">
           <svg className="form__star-image" width="37" height="33">
             <use xlinkHref="#icon-star"></use>
           </svg>
