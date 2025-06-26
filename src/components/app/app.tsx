@@ -8,8 +8,6 @@ import PrivateRoute from '../private-route/private-route';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import { useAppSelector } from '../../hooks';
 import LoadingPage from '../../pages/loading-page/loading-page';
-import HistoryRouter from '../history-route/history-route';
-import browserHistory from '../../browser-history';
 import { getAuthorizationStatus, getAuthCheckedStatus } from '../../store/user-process/selectors';
 import { getStatus } from '../../store/app-data/selectors';
 import { RequestStatus } from '../../const';
@@ -27,42 +25,40 @@ function App(): JSX.Element {
   }
 
   return (
-    <HistoryRouter history={browserHistory}>
-      <Routes>
-        <Route
-          path={AppRoute.Main}
-          element={<MainPage />}
-        />
-        <Route
-          path={AppRoute.Login}
-          element={
-            <PublicRoute
-              authorizationStatus={authorizationStatus}
-            >
-              <LoginPage />
-            </PublicRoute>
-          }
-        />
-        <Route
-          path={AppRoute.Favorites}
-          element={
-            <PrivateRoute
-              authorizationStatus={authorizationStatus}
-            >
-              <FavoritesPage />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path={AppRoute.OfferWithId}
-          element={<OfferPage />}
-        />
-        <Route
-          path="*"
-          element={<NotFoundPage />}
-        />
-      </Routes>
-    </HistoryRouter>
+    <Routes>
+      <Route
+        path={AppRoute.Main}
+        element={<MainPage />}
+      />
+      <Route
+        path={AppRoute.Login}
+        element={
+          <PublicRoute
+            authorizationStatus={authorizationStatus}
+          >
+            <LoginPage />
+          </PublicRoute>
+        }
+      />
+      <Route
+        path={AppRoute.Favorites}
+        element={
+          <PrivateRoute
+            authorizationStatus={authorizationStatus}
+          >
+            <FavoritesPage />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path={AppRoute.OfferWithId}
+        element={<OfferPage />}
+      />
+      <Route
+        path="*"
+        element={<NotFoundPage />}
+      />
+    </Routes>
   );
 }
 
