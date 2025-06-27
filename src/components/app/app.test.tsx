@@ -12,7 +12,7 @@ describe('Application Routing', () => {
     mockHistory = createMemoryHistory();
   });
 
-  it('should render "WelcomeScreen" when user navigate to "/"', () => {
+  it('should render "MainPage" when user navigate to "/"', () => {
     const withHistoryComponent = withHistory(<App />, mockHistory);
     const { withStoreComponent } = withStore(withHistoryComponent, makeFakeStore());
     mockHistory.push(AppRoute.Main);
