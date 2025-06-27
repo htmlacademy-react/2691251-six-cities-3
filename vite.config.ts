@@ -1,3 +1,5 @@
+/// <reference types='vitest' />
+/// <reference types='vite/client' />
 
 import { UserConfig } from 'vitest/config';
 
