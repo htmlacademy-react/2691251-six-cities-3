@@ -1,10 +1,22 @@
-import Card from '../../components/card/card';
+import OffersList from '../../components/offers-list/offers-list';
+import { Offers } from '../../types/offer';
+import { AppRoute } from '../../const';
+import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 type MainPageProps = {
   offersCount: number;
+  offers: Offers;
 }
 
-function MainPage({ offersCount }: MainPageProps): JSX.Element {
+function MainPage({ offersCount, offers }: MainPageProps): JSX.Element {
+  const [activeId, setActiveId] = useState<string>();
+
+  const handleChangeActiveId = (id?: string) => setActiveId(id);
+
+  // для теста выводим в консоль и отключаем линтер
+  console.log(activeId); //eslint-disable-line no-console
+
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -18,17 +30,17 @@ function MainPage({ offersCount }: MainPageProps): JSX.Element {
             <nav className="header__nav">
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
-                  <a className="header__nav-link header__nav-link--profile" href="#">
+                  <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Favorites}>
                     <div className="header__avatar-wrapper user__avatar-wrapper">
                     </div>
                     <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
                     <span className="header__favorite-count">3</span>
-                  </a>
+                  </Link>
                 </li>
                 <li className="header__nav-item">
-                  <a className="header__nav-link" href="#">
+                  <Link className="header__nav-link" to={AppRoute.Login}>
                     <span className="header__signout">Sign out</span>
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </nav>
@@ -95,11 +107,10 @@ function MainPage({ offersCount }: MainPageProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                < Card />
-                < Card />
-                < Card />
-                < Card />
-                < Card />
+                < OffersList
+                  onHandleChangeActiveId={handleChangeActiveId}
+                  offers={offers}
+                />
               </div>
             </section>
             <div className="cities__right-section">
