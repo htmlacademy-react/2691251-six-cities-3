@@ -8,16 +8,16 @@ export const offers: Offer[] = [
     'price': 227,
     'previewImage': 'https://15.design.htmlacademy.pro/static/hotel/3.jpg',
     'city': {
-      'name': 'Paris',
+      'name': 'Amsterdam',
       'location': {
-        'latitude': 48.85661,
-        'longitude': 2.351499,
+        'latitude': 52.37454,
+        'longitude': 4.897976,
         'zoom': 13
       }
     },
     'location': {
-      'latitude': 48.868610000000004,
-      'longitude': 2.342499,
+      'latitude': 52.3909553943508,
+      'longitude': 4.85309666406198,
       'zoom': 16
     },
     'isFavorite': true,
@@ -31,16 +31,16 @@ export const offers: Offer[] = [
     'price': 202,
     'previewImage': 'https://15.design.htmlacademy.pro/static/hotel/9.jpg',
     'city': {
-      'name': 'Paris',
+      'name': 'Amsterdam',
       'location': {
-        'latitude': 48.85661,
-        'longitude': 2.351499,
+        'latitude': 52.37454,
+        'longitude': 4.897976,
         'zoom': 13
       }
     },
     'location': {
-      'latitude': 48.858610000000006,
-      'longitude': 2.330499,
+      'latitude': 52.3609553943508,
+      'longitude': 4.85309666406198,
       'zoom': 16
     },
     'isFavorite': false,
@@ -54,16 +54,16 @@ export const offers: Offer[] = [
     'price': 217,
     'previewImage': 'https://15.design.htmlacademy.pro/static/hotel/13.jpg',
     'city': {
-      'name': 'Paris',
+      'name': 'Amsterdam',
       'location': {
-        'latitude': 48.85661,
-        'longitude': 2.351499,
+        'latitude': 52.37454,
+        'longitude': 4.897976,
         'zoom': 13
       }
     },
     'location': {
-      'latitude': 48.834610000000005,
-      'longitude': 2.335499,
+      'latitude': 52.3909553943508,
+      'longitude': 4.929309666406198,
       'zoom': 16
     },
     'isFavorite': false,
@@ -77,16 +77,16 @@ export const offers: Offer[] = [
     'price': 171,
     'previewImage': 'https://15.design.htmlacademy.pro/static/hotel/3.jpg',
     'city': {
-      'name': 'Cologne',
+      'name': 'Amsterdam',
       'location': {
-        'latitude': 50.938361,
-        'longitude': 6.959974,
+        'latitude': 52.37454,
+        'longitude': 4.897976,
         'zoom': 13
       }
     },
     'location': {
-      'latitude': 50.916361,
-      'longitude': 6.944974,
+      'latitude': 52.3809553943508,
+      'longitude': 4.939309666406198,
       'zoom': 16
     },
     'isFavorite': true,
