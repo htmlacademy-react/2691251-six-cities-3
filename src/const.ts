@@ -1,6 +1,4 @@
-export const Setting = {
-  offersCount: 312
-};
+export const citiesList = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
 
 export enum AuthorizationStatus {
   Auth = 'AUTH',
