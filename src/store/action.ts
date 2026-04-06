@@ -1,6 +1,15 @@
 import {createAction} from '@reduxjs/toolkit';
 import { City, Offer } from '../types/offer';
+import {AuthorizationStatus} from '../const';
 
-export const initOffers = createAction<{offers: Offer[]}>('offers/addOffers');
+
 export const changeActiveCity = createAction<{city: City}>('offers/changeCity');
+
+export const loadOffers = createAction<Offer[]>('data/loadOffers');
+
+export const setOffersDataLoadingStatus = createAction<boolean>('data/setOffersDataLoadingStatus');
+
+export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
+
+export const setError = createAction<string | null>('game/setError');
 

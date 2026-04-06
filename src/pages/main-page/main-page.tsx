@@ -9,6 +9,7 @@ import { useAppSelector } from '../../hooks';
 import CitiesList from '../../components/cities-list/cities-list';
 import { SortOption } from '../../components/sort-list/const';
 import { Offer } from '../../types/offer';
+import MainEmpty from '../../components/main-empty/main-empty';
 
 function MainPage(): JSX.Element {
   const selectedCity = useAppSelector((state) => state.city);
@@ -75,27 +76,29 @@ function MainPage(): JSX.Element {
         </div>
         <div className="cities">
           <div className="cities__places-container container">
-            <section className="cities__places places">
-              <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offers.length} places to stay in {selectedCity.name}</b>
-              <SortList current={activeSort} setter={setActiveSort} />
-              <div className="cities__places-list places__list tabs__content">
-                < OffersList
-                  onHandleChangeActiveId={handleChangeActiveId}
-                  offers={sortedOffers}
-                />
-              </div>
-            </section>
+            {offers.length === 0 ? <MainEmpty selectedCityName={selectedCity.name} /> :
+              <section className="cities__places places">
+                <h2 className="visually-hidden">Places</h2>
+                <b className="places__found">{offers.length} places to stay in {selectedCity.name}</b>
+                <SortList current={activeSort} setter={setActiveSort} />
+                <div className="cities__places-list places__list tabs__content">
+                  < OffersList
+                    onHandleChangeActiveId={handleChangeActiveId}
+                    offers={sortedOffers}
+                  />
+                </div>
+              </section>}
             <div className="cities__right-section">
               <section
                 style={{ width: '100%' }}
                 className={`${offers.length === 0 ? 'cities__map' : ''} map`}
               >
-                <Map
-                  city={selectedCity}
-                  offers={offers}
-                  activeId={activeId}
-                />
+                {offers.length === 0 ? '' :
+                  <Map
+                    city={selectedCity}
+                    offers={offers}
+                    activeId={activeId}
+                  />}
 
               </section>
             </div>

@@ -1,4 +1,3 @@
-import { Offers } from '../../types/offer';
 import ReviewForm from '../../components/review-form/review-form';
 import NearOffersList from '../../components/near-offers-list/near-offers-list';
 import Map from '../../components/map/map';
@@ -7,13 +6,14 @@ import { Link, useParams } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { mockReviews } from '../../mocks/review';
+import { useAppSelector } from '../../hooks';
 
 type OfferPageProps = {
-  offers: Offers;
   authorizationStatus: AuthorizationStatus;
 }
 
-function OfferPage({ offers, authorizationStatus }: OfferPageProps): JSX.Element {
+function OfferPage({ authorizationStatus }: OfferPageProps): JSX.Element {
+  const offers = useAppSelector((state) => state.offers);
   const params = useParams();
   const offer = offers.find((innerOffer) => innerOffer.id === params.id);
 
@@ -76,9 +76,9 @@ function OfferPage({ offers, authorizationStatus }: OfferPageProps): JSX.Element
             <div className="offer__container container">
               <div className="offer__wrapper">
                 {offer.isPremium &&
-                <div className="offer__mark">
-                  <span>Premium</span>
-                </div>}
+                  <div className="offer__mark">
+                    <span>Premium</span>
+                  </div>}
                 <div className="offer__name-wrapper">
                   <h1 className="offer__name">
                     {offer.title}
@@ -187,6 +187,7 @@ function OfferPage({ offers, authorizationStatus }: OfferPageProps): JSX.Element
               <Map
                 city={offer.city}
                 offers={offers}
+                activeId={offer.id}
               />
             </section>
           </section>
