@@ -7,7 +7,6 @@ import { useEffect } from 'react';
 import OfferGallery from '../../components/offer-gallery/offer-gallery';
 import LoadingPage from '../loading-page/loading-page';
 import { RequestStatus } from '../../const';
-import { Navigate } from 'react-router-dom';
 import { useActionCreators } from '../../hooks/store';
 import { AuthorizationStatus } from '../../const';
 import Header from '../../components/header/header';
@@ -19,6 +18,7 @@ import { reviewsActions } from '../../store/review/review';
 import { getFullOffer, getNearByOffers, getOfferStatus } from '../../store/offer/selectors';
 import { getReviews } from '../../store/review/selectors';
 import OfferContainer from '../../components/offer-contanier/offer-container';
+import NotFoundPage from '../not-found-page/not-found-page';
 
 const MAX_COUNT_NEAR_OFFERS = 3;
 
@@ -55,7 +55,7 @@ function OfferPage(): JSX.Element {
   }, [id, clearOffer]);
 
   if (status === RequestStatus.Failed) {
-    return <div>not_found</div>;
+    return <NotFoundPage />;
   }
 
   if (status === RequestStatus.Loading || !fullOffer) {
@@ -66,49 +66,48 @@ function OfferPage(): JSX.Element {
   const nearOffersPlusCurrent = [fullOffer, ...nearbyOffers];
 
   return (
-    !fullOffer ? <Navigate to={'no-such-page'} /> :
-      <div className="page">
-        <header className="header">
-          <Header />
-        </header>
+    <div className="page">
+      <header className="header">
+        <Header />
+      </header>
 
-        <main className="page__main page__main--offer">
-          <section className="offer">
-            <OfferGallery images={fullOffer.images} />
-            <div className="offer__container container">
-              <div className="offer__wrapper">
-                <OfferContainer offer={fullOffer} />
-                <section className="offer__reviews reviews">
-                  {reviews.length > 0 &&
-                    <>
-                      <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
-                      <ReviewsList reviews={reviews} />
-                    </>}
-                  {authorizationStatus === AuthorizationStatus.Auth && < ReviewForm offerId={fullOffer.id} />}
-                </section>
-              </div>
+      <main className="page__main page__main--offer">
+        <section className="offer">
+          <OfferGallery images={fullOffer.images} />
+          <div className="offer__container container">
+            <div className="offer__wrapper">
+              <OfferContainer offer={fullOffer} />
+              <section className="offer__reviews reviews">
+                {reviews.length > 0 &&
+                  <>
+                    <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
+                    <ReviewsList reviews={reviews} />
+                  </>}
+                {authorizationStatus === AuthorizationStatus.Auth && < ReviewForm offerId={fullOffer.id} />}
+              </section>
             </div>
-            <section
-              style={{ width: '100%' }}
-              className={`${offers.length === 0 ? 'offer__map map' : ''} map`}
-            >
-              <Map
-                city={fullOffer.city}
-                offers={nearOffersPlusCurrent}
-                activeId={fullOffer.id}
-              />
-            </section>
-          </section>
-          <div className="container">
-            <section className="near-places places">
-              <h2 className="near-places__title">Other places in the neighbourhood</h2>
-              <div className="near-places__list places__list">
-                <NearOffersList offers={nearByOffers} />
-              </div>
-            </section>
           </div>
-        </main>
-      </div>);
+          <section
+            style={{ width: '100%' }}
+            className={`${offers.length === 0 ? 'offer__map map' : ''} map`}
+          >
+            <Map
+              city={fullOffer.city}
+              offers={nearOffersPlusCurrent}
+              activeId={fullOffer.id}
+            />
+          </section>
+        </section>
+        <div className="container">
+          <section className="near-places places">
+            <h2 className="near-places__title">Other places in the neighbourhood</h2>
+            <div className="near-places__list places__list">
+              <NearOffersList offers={nearByOffers} />
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>);
 }
 
 
