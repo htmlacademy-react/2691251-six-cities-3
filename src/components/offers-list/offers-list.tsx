@@ -1,5 +1,6 @@
 import { Offers } from '../../types/offer';
 import Card from '../card/card';
+import { CardClass } from '../../const';
 
 type OffersListProps = {
   offers: Offers;
@@ -16,7 +17,7 @@ function OffersList({ offers, onHandleChangeActiveId }: OffersListProps): JSX.El
             onHandleChangeActiveId={onHandleChangeActiveId}
             offer={offer}
             key={keyValue}
-            isNearOffer={false}
+            cardClass={CardClass.Cities}
           />
         );
       })}

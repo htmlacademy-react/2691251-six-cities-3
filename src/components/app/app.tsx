@@ -11,14 +11,15 @@ import LoadingPage from '../../pages/loading-page/loading-page';
 import HistoryRouter from '../history-route/history-route';
 import browserHistory from '../../browser-history';
 import { getAuthorizationStatus, getAuthCheckedStatus } from '../../store/user-process/selectors';
-import { getOffersDataLoadingStatus } from '../../store/app-data/selectors';
+import { getStatus } from '../../store/app-data/selectors';
+import { RequestStatus } from '../../const';
 
 function App(): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
-  const isOffersDataLoading = useAppSelector(getOffersDataLoadingStatus);
+  const isOffersDataLoading = useAppSelector(getStatus);
   const isAuthChecked = useAppSelector(getAuthCheckedStatus);
 
-  if (!isAuthChecked || isOffersDataLoading) {
+  if (!isAuthChecked || isOffersDataLoading === RequestStatus.Loading) {
     return (
       <LoadingPage />
     );

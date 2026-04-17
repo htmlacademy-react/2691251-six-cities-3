@@ -11,6 +11,11 @@ import { Offer } from '../../types/offer';
 import MainEmpty from '../../components/main-empty/main-empty';
 import { getOffers } from '../../store/app-data/selectors';
 import { getCity } from '../../store/app-process/selectors';
+import { offersActions } from '../../store/app-data/app-data';
+import { useActionCreators } from '../../hooks/store';
+import { RequestStatus } from '../../const';
+import { getStatus } from '../../store/app-data/selectors';
+import { useEffect } from 'react';
 
 function MainPage(): JSX.Element {
   const selectedCity = useAppSelector(getCity);
@@ -37,6 +42,16 @@ function MainPage(): JSX.Element {
 
   const handleChangeActiveId = (id?: string) => setActiveId(id);
 
+  const status = useAppSelector(getStatus);
+
+  const { fetchOffersAction } = useActionCreators(offersActions);
+
+  useEffect(() => {
+    if (status === RequestStatus.Idle) {
+      fetchOffersAction();
+    }
+  }, [status, fetchOffersAction]);
+
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -51,33 +66,35 @@ function MainPage(): JSX.Element {
           </section>
         </div>
         <div className="cities">
-          <div className="cities__places-container container">
-            {offers.length === 0 ? <MainEmpty selectedCityName={selectedCity.name} /> :
-              <section className="cities__places places">
-                <h2 className="visually-hidden">Places</h2>
-                <b className="places__found">{offers.length} places to stay in {selectedCity.name}</b>
-                <SortList current={activeSort} setter={setActiveSort} />
-                <div className="cities__places-list places__list tabs__content">
-                  < OffersList
-                    onHandleChangeActiveId={handleChangeActiveId}
-                    offers={sortedOffers}
-                  />
+          <div className={`cities__places-container ${(offers.length === 0) ? 'cities__places-container--empty' : ''} container`}>
+            {(offers.length === 0) && <MainEmpty selectedCityName={selectedCity.name} />}
+            {(offers.length > 0) &&
+              <>
+                <section className="cities__places places">
+                  <h2 className="visually-hidden">Places</h2>
+                  <b className="places__found">{offers.length} places to stay in {selectedCity.name}</b>
+                  <SortList current={activeSort} setter={setActiveSort} />
+                  <div className="cities__places-list places__list tabs__content">
+                    < OffersList
+                      onHandleChangeActiveId={handleChangeActiveId}
+                      offers={sortedOffers}
+                    />
+                  </div>
+                </section>
+                <div className="cities__right-section">
+                  <section
+                    style={{ width: '100%' }}
+                    className={`${offers.length === 0 ? 'cities__map' : ''} map`}
+                  >
+                    {offers.length === 0 ? '' :
+                      <Map
+                        city={selectedCity}
+                        offers={offers}
+                        activeId={activeId}
+                      />}
+                  </section>
                 </div>
-              </section>}
-            <div className="cities__right-section">
-              <section
-                style={{ width: '100%' }}
-                className={`${offers.length === 0 ? 'cities__map' : ''} map`}
-              >
-                {offers.length === 0 ? '' :
-                  <Map
-                    city={selectedCity}
-                    offers={offers}
-                    activeId={activeId}
-                  />}
-
-              </section>
-            </div>
+              </>}
           </div>
         </div>
       </main>

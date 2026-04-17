@@ -1,5 +1,6 @@
 import { Offers } from '../../types/offer';
 import Card from '../card/card';
+import { CardClass } from '../../const';
 
 type NearOffersListProps = {
   offers: Offers;
@@ -15,7 +16,7 @@ function NearOffersList({ offers}: NearOffersListProps): JSX.Element {
           <Card
             offer={offer}
             key={keyValue}
-            isNearOffer
+            cardClass={CardClass.NearPlaces}
           />
         );
       })}

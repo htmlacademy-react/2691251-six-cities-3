@@ -1,12 +1,14 @@
 import classNames from 'classnames';
 import { FullOffer } from '../../types/offer';
 import { memo } from 'react';
+import Bookmark from '../bookmark/bookmark';
+import { BookmarkClass } from '../../const';
 
 type OfferContainerProps = {
   offer: FullOffer;
 }
 
-function OfferContainer_({ offer}: OfferContainerProps): JSX.Element {
+function OfferContainer_({ offer }: OfferContainerProps): JSX.Element {
   const { bedrooms, description, goods, host, isPremium, maxAdults, price, rating, title, type } = offer;
   const { name, avatarUrl, isPro } = host;
 
@@ -22,12 +24,7 @@ function OfferContainer_({ offer}: OfferContainerProps): JSX.Element {
         <h1 className="offer__name">
           {title}
         </h1>
-        <button className="offer__bookmark-button button" type="button">
-          <svg className="offer__bookmark-icon" width="31" height="33">
-            <use xlinkHref="#icon-bookmark"></use>
-          </svg>
-          <span className="visually-hidden">To bookmarks</span>
-        </button>
+        <Bookmark isFavorite={offer.isFavorite} offerId={offer.id} bookmarkClass={BookmarkClass.Offer} />
       </div>
       <div className="offer__rating rating">
         <div className="offer__stars rating__stars">

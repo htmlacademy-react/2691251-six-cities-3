@@ -57,6 +57,17 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
+export enum CardClass {
+  Favorites = 'favorites',
+  NearPlaces = 'near-places',
+  Cities = 'cities'
+}
+
+export enum BookmarkClass{
+  Offer = 'offer',
+  PlaceCard = 'place-card'
+}
+
 export enum AppRoute {
   Login = '/login',
   OfferWithId = '/offer/:id',
@@ -84,7 +95,8 @@ export enum NameSpace {
   App = 'APP',
   User = 'USER',
   Offer = 'OFFER',
-  Review = 'REVIEW'
+  Review = 'REVIEW',
+  Favorites = 'FAVORITES'
 }
 
 export const enum RequestStatus {

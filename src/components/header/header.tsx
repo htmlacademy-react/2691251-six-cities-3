@@ -4,13 +4,28 @@ import { AppRoute, AuthorizationStatus } from '../../const';
 import { useAppSelector, useAppDispatch } from '../../hooks';
 import { logoutAction } from '../../store/api-actions';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
-import { getUserEmail } from '../../store/app-process/selectors';
+import { getUserData } from '../../store/user-process/selectors';
+import { RequestStatus } from '../../const';
+import { useEffect } from 'react';
+import { getFavoritesStatus, getFavorites } from '../../store/favorites/selectors';
+import { useActionCreators } from '../../hooks/store';
+import { favoritesActions } from '../../store/favorites/favorites';
 
 function Header(): JSX.Element {
   const authenticationStatus = useAppSelector(getAuthorizationStatus);
-  const userEmail = useAppSelector(getUserEmail);
+  const userData = useAppSelector(getUserData);
+  const { fetchFavorites } = useActionCreators(favoritesActions);
+  const status = useAppSelector(getFavoritesStatus);
+  const favorites = useAppSelector(getFavorites);
+  const countFavorites = favorites.length;
 
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (status === RequestStatus.Idle) {
+      fetchFavorites();
+    }
+  }, [status, fetchFavorites]);
 
   return (
     <div className="container">
@@ -34,10 +49,13 @@ function Header(): JSX.Element {
               <>
                 <li className="header__nav-item user">
                   <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Favorites}>
-                    <div className="header__avatar-wrapper user__avatar-wrapper">
+                    <div
+                      className="header__avatar-wrapper user__avatar-wrapper"
+                      style={{ backgroundImage: `url(${userData?.avatarUrl})`, borderRadius: '50%' }}
+                    >
                     </div>
-                    <span className="header__user-name user__name">{userEmail}</span>
-                    <span className="header__favorite-count">3</span>
+                    <span className="header__user-name user__name">{userData?.email}</span>
+                    <span className="header__favorite-count">{countFavorites}</span>
                   </Link>
                 </li>
                 <li className="header__nav-item">
