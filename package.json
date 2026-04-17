@@ -47,7 +47,7 @@
     "jsdom": "22.1.0",
     "typescript": "5.2.2",
     "vite": "4.4.11",
-    "vitest": "0.34.6"
+    "vitest": "1.5.1"
   },
   "browserslist": {
     "production": [

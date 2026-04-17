@@ -23,7 +23,7 @@ function Card({ offer, onHandleChangeActiveId, cardClass }: CardProps): JSX.Elem
           <span>Premium</span>
         </div> : ''}
       <div className={`${cardClass}__image-wrapper place-card__image-wrapper`}>
-        <Link to={`offer/${offer.id}`}>
+        <Link to={`/offer/${offer.id}`}>
           <img className="place-card__image" src={offer.previewImage} width={isFavorite ? '150' : '260'} height={isFavorite ? '110' : '200'} alt="Place image" />
         </Link>
       </div>
@@ -42,7 +42,7 @@ function Card({ offer, onHandleChangeActiveId, cardClass }: CardProps): JSX.Elem
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`offer/${offer.id}`}>{offer.title}</Link>
+          <Link to={`/offer/${offer.id}`}>{offer.title}</Link>
         </h2>
         <p className="place-card__type">{offer.type}</p>
       </div>

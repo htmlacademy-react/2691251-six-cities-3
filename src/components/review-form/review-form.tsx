@@ -42,7 +42,7 @@ function ReviewForm({ offerId }: ReviewsFormProps): JSX.Element {
       pending: 'Sending',
       success: {
         render: () => {
-          setUserReview({ ...userReview, isformDisabled: false });
+          setUserReview({ review: '', rating: '', isformDisabled: false });
           form.reset();
           return 'Sent!';
         }
@@ -56,6 +56,9 @@ function ReviewForm({ offerId }: ReviewsFormProps): JSX.Element {
     });
   };
 
+  const submitFlags = [!userReview.rating, userReview.review.length < MIN_COMMENT_LENGTH, userReview.isformDisabled, userReview.review.length > MAX_COMMENT_LENGTH];
+  const isSubmitDisabled = submitFlags.some((element) => element === true);
+
   return (
     <form className="reviews__form form"
       action="#"
@@ -65,7 +68,7 @@ function ReviewForm({ offerId }: ReviewsFormProps): JSX.Element {
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         <input className="form__rating-input visually-hidden" name="rating" value="5" id="5-stars" type="radio" disabled={userReview.isformDisabled}
-          onChange={(evt: ChangeEvent<HTMLInputElement>) => {
+          onInput={(evt: ChangeEvent<HTMLInputElement>) => {
             const { name, value } = evt.target;
             setUserReview({ ...userReview, [name]: value });
           }}
@@ -77,7 +80,7 @@ function ReviewForm({ offerId }: ReviewsFormProps): JSX.Element {
         </label>
 
         <input className="form__rating-input visually-hidden" name="rating" value="4" id="4-stars" type="radio" disabled={userReview.isformDisabled}
-          onChange={(evt: ChangeEvent<HTMLInputElement>) => {
+          onInput={(evt: ChangeEvent<HTMLInputElement>) => {
             const { name, value } = evt.target;
             setUserReview({ ...userReview, [name]: value });
           }}
@@ -89,7 +92,7 @@ function ReviewForm({ offerId }: ReviewsFormProps): JSX.Element {
         </label>
 
         <input className="form__rating-input visually-hidden" name="rating" value="3" id="3-stars" type="radio" disabled={userReview.isformDisabled}
-          onChange={(evt: ChangeEvent<HTMLInputElement>) => {
+          onInput={(evt: ChangeEvent<HTMLInputElement>) => {
             const { name, value } = evt.target;
             setUserReview({ ...userReview, [name]: value });
           }}
@@ -101,7 +104,7 @@ function ReviewForm({ offerId }: ReviewsFormProps): JSX.Element {
         </label>
 
         <input className="form__rating-input visually-hidden" name="rating" value="2" id="2-stars" type="radio" disabled={userReview.isformDisabled}
-          onChange={(evt: ChangeEvent<HTMLInputElement>) => {
+          onInput={(evt: ChangeEvent<HTMLInputElement>) => {
             const { name, value } = evt.target;
             setUserReview({ ...userReview, [name]: value });
           }}
@@ -112,13 +115,13 @@ function ReviewForm({ offerId }: ReviewsFormProps): JSX.Element {
           </svg>
         </label>
 
-        <input className="form__rating-input visually-hidden" name="rating" value="1" id="1-star" type="radio" disabled={userReview.isformDisabled}
-          onChange={(evt: ChangeEvent<HTMLInputElement>) => {
+        <input className="form__rating-input visually-hidden" name="rating" value="1" id="1-stars" type="radio" disabled={userReview.isformDisabled}
+          onInput={(evt: ChangeEvent<HTMLInputElement>) => {
             const { name, value } = evt.target;
             setUserReview({ ...userReview, [name]: value });
           }}
         />
-        <label htmlFor="1-star" className="reviews__rating-label form__rating-label" title="terribly">
+        <label htmlFor="1-stars" className="reviews__rating-label form__rating-label" title="terribly">
           <svg className="form__star-image" width="37" height="33">
             <use xlinkHref="#icon-star"></use>
           </svg>
@@ -127,7 +130,6 @@ function ReviewForm({ offerId }: ReviewsFormProps): JSX.Element {
       <textarea
         className="reviews__textarea form__textarea"
         id="review"
-        maxLength={MAX_COMMENT_LENGTH}
         minLength={MIN_COMMENT_LENGTH}
         required
         disabled={userReview.isformDisabled}
@@ -147,7 +149,7 @@ function ReviewForm({ offerId }: ReviewsFormProps): JSX.Element {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled={!userReview.rating || userReview.review.length < MIN_COMMENT_LENGTH || userReview.isformDisabled}
+          disabled={isSubmitDisabled}
         >Submit
         </button>
       </div>

@@ -12,22 +12,23 @@ import { AuthorizationStatus } from '../../const';
 import Header from '../../components/header/header';
 import { useAppSelector } from '../../hooks';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
-import { getOffers } from '../../store/app-data/selectors';
 import { offerActions } from '../../store/offer/offer';
 import { reviewsActions } from '../../store/review/review';
 import { getFullOffer, getNearByOffers, getOfferStatus } from '../../store/offer/selectors';
 import { getReviews } from '../../store/review/selectors';
 import OfferContainer from '../../components/offer-contanier/offer-container';
 import NotFoundPage from '../not-found-page/not-found-page';
+import { sortReviewsByDate } from '../../utils';
 
 const MAX_COUNT_NEAR_OFFERS = 3;
+const MAX_REVIEWS = 10;
+
+const allActions = {
+  ...offerActions,
+  ...reviewsActions
+};
 
 function OfferPage(): JSX.Element {
-
-  const allActions = {
-    ...offerActions,
-    ...reviewsActions
-  };
 
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
@@ -35,8 +36,7 @@ function OfferPage(): JSX.Element {
   const status = useAppSelector(getOfferStatus);
   const nearByOffers = useAppSelector(getNearByOffers);
   const reviews = useAppSelector(getReviews);
-
-  const offers = useAppSelector(getOffers);
+  const sortedReviews = reviews.toSorted(sortReviewsByDate).slice(0, MAX_REVIEWS);
 
   const { setActiveId, fetchNearByOffers, fetchFullOffer, fetchReviews, clearOffer } =
     useActionCreators(allActions);
@@ -62,8 +62,8 @@ function OfferPage(): JSX.Element {
     return <LoadingPage />;
   }
 
-  const nearbyOffers = nearByOffers && nearByOffers.slice(0, MAX_COUNT_NEAR_OFFERS);
-  const nearOffersPlusCurrent = [fullOffer, ...nearbyOffers];
+  const slicedNearByOffers = nearByOffers && nearByOffers.slice(0, MAX_COUNT_NEAR_OFFERS);
+  const nearOffersPlusCurrent = [fullOffer, ...slicedNearByOffers];
 
   return (
     <div className="page">
@@ -81,28 +81,24 @@ function OfferPage(): JSX.Element {
                 {reviews && reviews.length > 0 &&
                   <>
                     <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
-                    <ReviewsList reviews={reviews} />
+                    <ReviewsList reviews={sortedReviews} />
                   </>}
                 {authorizationStatus === AuthorizationStatus.Auth && < ReviewForm offerId={fullOffer.id} />}
               </section>
             </div>
           </div>
-          <section
-            style={{ width: '100%' }}
-            className={`${offers.length === 0 ? 'offer__map map' : ''} map`}
-          >
-            <Map
-              city={fullOffer.city}
-              offers={nearOffersPlusCurrent}
-              activeId={fullOffer.id}
-            />
-          </section>
+          <Map
+            city={fullOffer.city}
+            offers={nearOffersPlusCurrent}
+            activeId={fullOffer.id}
+            place="offer"
+          />
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
-              <NearOffersList offers={nearByOffers} />
+              <NearOffersList offers={slicedNearByOffers} />
             </div>
           </section>
         </div>

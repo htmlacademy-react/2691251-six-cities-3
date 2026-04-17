@@ -3,6 +3,7 @@ import { AppRoute } from '../../const';
 import { useRef, FormEvent } from 'react';
 import { useAppDispatch } from '../../hooks';
 import { loginAction } from '../../store/api-actions';
+import RandomCity from '../../components/random-city/random-city';
 
 const PASSWORD_PATTERN = /([a-zA-Z]+[0-9]|[0-9]+[a-zA-Z])[a-zA-Z0-9]*/;
 
@@ -75,13 +76,7 @@ function LoginPage(): JSX.Element {
               <button className="login__submit form__submit button" type="submit">Sign in</button>
             </form>
           </section>
-          <section className="locations locations--login locations--current">
-            <div className="locations__item">
-              <Link className="locations__item-link" to="#">
-                <span>Amsterdam</span>
-              </Link>
-            </div>
-          </section>
+          <RandomCity />
         </div>
       </main>
     </div>);

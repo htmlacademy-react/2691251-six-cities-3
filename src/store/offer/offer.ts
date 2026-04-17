@@ -45,12 +45,20 @@ const offerSlice = createSlice({
       .addCase(fetchNearByOffers.fulfilled, (state, action) => {
         state.nearby = action.payload;
       })
-      // postFavorite fullfilled
+      // обработка избранного для оффера
       .addCase(postFavorite.fulfilled, (state, action) => {
         const changedOffer = action.payload;
 
         if (state.info?.id === changedOffer.id) {
           state.info.isFavorite = changedOffer.isFavorite;
+        }
+        // обработка избранного в предложениях неподалеку
+        for (const offer of state.nearby) {
+          if (offer.id === changedOffer.id) {
+            offer.isFavorite = changedOffer.isFavorite;
+
+            return;
+          }
         }
       });
   },
