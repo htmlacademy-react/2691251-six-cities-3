@@ -35,5 +35,4 @@ const userProcess = createSlice({
   }
 });
 
-const userActions = {...userProcess.actions, checkAuthAction, loginAction, logoutAction};
-export { userProcess, userActions };
+export { userProcess};

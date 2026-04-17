@@ -15,6 +15,13 @@ type BookmarkProps = {
   offerId: Offer['id'];
 }
 
+const Size = {
+  IN_WIDTH: 31,
+  OUT_WIDTH: 18,
+  IN_HEIGHT: 33,
+  OUT_HEIGHT: 19
+};
+
 function Bookmark({ bookmarkClass, isFavorite, offerId }: BookmarkProps): JSX.Element {
   const { isOn: isBookmarked, toggle: toggleBookmark } = useBoolean(isFavorite);
   const isInOffer = bookmarkClass === BookmarkClass.Offer;
@@ -42,7 +49,7 @@ function Bookmark({ bookmarkClass, isFavorite, offerId }: BookmarkProps): JSX.El
       type="button"
       onClick={handleClick}
     >
-      <svg className={`${bookmarkClass}__bookmark-icon`} width={isInOffer ? 31 : 18} height={isInOffer ? 33 : 19}>
+      <svg className={`${bookmarkClass}__bookmark-icon`} width={isInOffer ? Size.IN_WIDTH : Size.OUT_WIDTH} height={isInOffer ? Size.IN_HEIGHT : Size.OUT_HEIGHT}>
         <use xlinkHref="#icon-bookmark"></use>
       </svg>
       <span className="visually-hidden">{isBookmarked ? 'In' : 'To'} bookmarks</span>

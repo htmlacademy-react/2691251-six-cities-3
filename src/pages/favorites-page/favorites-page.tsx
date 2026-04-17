@@ -18,9 +18,7 @@ function FavoritesPage(): JSX.Element {
   });
 
   return (
-
-
-    <div className="page">
+    <div className={`page ${offers.length === 0 ? 'page--favorites-empty' : ''}`}>
       <header className="header">
         <Header />
       </header>
@@ -64,7 +62,7 @@ function FavoritesPage(): JSX.Element {
             </section>
           </div>
         </main>}
-      <footer className="footer container">
+      <footer className={`footer ${offers.length === 0 ? '' : 'container'}`}>
         <Link className="footer__logo-link" to="main.html">
           <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33" />
         </Link>

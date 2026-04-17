@@ -64,7 +64,7 @@ function Header(): JSX.Element {
                       evt.preventDefault();
                       dispatch(logoutAction());
                     }}
-                    to='/'
+                    to={AppRoute.Main}
                   >
                     <span className="header__signout">Sign out</span>
                   </Link>

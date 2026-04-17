@@ -26,4 +26,3 @@ export type PostCommentProps = {
   offerId: FullOffer['id'] | undefined;
 }
 
-export type Reviews = Review[];

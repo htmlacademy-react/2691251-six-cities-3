@@ -3,12 +3,15 @@ import { Offer } from '../../types/offer';
 import { CardClass } from '../../const';
 import Bookmark from '../bookmark/bookmark';
 import { BookmarkClass } from '../../const';
+import { capitalizeFirst } from '../../utils';
 
 type CardProps = {
   offer: Offer;
   onHandleChangeActiveId?: (id?: string) => void;
   cardClass: CardClass;
 }
+
+const STARS_STYLE_COEFF = 20;
 
 function Card({ offer, onHandleChangeActiveId, cardClass }: CardProps): JSX.Element {
   const isFavorite = cardClass === CardClass.Favorites;
@@ -37,14 +40,14 @@ function Card({ offer, onHandleChangeActiveId, cardClass }: CardProps): JSX.Elem
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ width: `${Math.round(offer.rating) * 20}%` }}></span>
+            <span style={{ width: `${Math.round(offer.rating) * STARS_STYLE_COEFF}%` }}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
         <h2 className="place-card__name">
           <Link to={`/offer/${offer.id}`}>{offer.title}</Link>
         </h2>
-        <p className="place-card__type">{offer.type}</p>
+        <p className="place-card__type">{capitalizeFirst(offer.type)}</p>
       </div>
     </article>);
 }

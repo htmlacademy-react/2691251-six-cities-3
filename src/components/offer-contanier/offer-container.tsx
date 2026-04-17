@@ -3,10 +3,13 @@ import { FullOffer } from '../../types/offer';
 import { memo } from 'react';
 import Bookmark from '../bookmark/bookmark';
 import { BookmarkClass } from '../../const';
+import { capitalizeFirst } from '../../utils';
 
 type OfferContainerProps = {
   offer: FullOffer;
 }
+
+const STARS_STYLE_COEFF = 20;
 
 function OfferContainer_({ offer }: OfferContainerProps): JSX.Element {
   const { bedrooms, description, goods, host, isPremium, maxAdults, price, rating, title, type } = offer;
@@ -28,14 +31,14 @@ function OfferContainer_({ offer }: OfferContainerProps): JSX.Element {
       </div>
       <div className="offer__rating rating">
         <div className="offer__stars rating__stars">
-          <span style={{ width: `${Math.round(offer.rating) * 20}%` }}></span>
+          <span style={{ width: `${Math.round(offer.rating) * STARS_STYLE_COEFF}%` }}></span>
           <span className="visually-hidden">Rating</span>
         </div>
         <span className="offer__rating-value rating__value">{rating}</span>
       </div>
       <ul className="offer__features">
         <li className="offer__feature offer__feature--entire">
-          {type}
+          {capitalizeFirst(type)}
         </li>
         <li className="offer__feature offer__feature--bedrooms">
           {bedrooms > 1 ? `${bedrooms} Bedrooms` : `${bedrooms} Bedroom`}

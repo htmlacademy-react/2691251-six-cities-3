@@ -11,3 +11,11 @@ export const getRandomInteger = (min: number, max: number) => {
   return Math.floor(result);
 };
 
+export const capitalizeFirst = (string: string) => {
+  if (!string) {
+    return string;
+  }
+
+  return string.charAt(0).toUpperCase() + string.slice(1);
+};
+
